@@ -1,21 +1,40 @@
-//#include<stdio.h>
-//int main()
-//{
-//	double m,n,u;
-//	scanf("%lf",&m);
-//	int l=(int)m;
-//	u=m-l;
-//	int t=m-u;
-//	int a=(t)/100;
-//	int b=(t-a*100)/10;
-//	int c=(t-a*100-b*10);
-//	int v=u*10;
-//	printf("%d.%d%d%d",v,c,b,a);
-//}
 #include<stdio.h>
 int main()
 {
-	int a,b,c,d;
-	scanf("%c%c%c.%c", &a, &b, &c, &d);
-	printf("%c.%c%c%c", d, c, b, a);
+	long long n;
+	scanf("%lld",&n);
+	int flag=0;
+	if(n<0)
+	{
+		flag=1;
+		n*=-1;
+	}
+	long long m=n;
+	int la=1;
+	for(la=1;;la++)
+	{
+		if(m<10)
+		{
+			break;
+		}
+		m/=10;
+	}
+	m=n;
+	int arr[la]={0};
+	for(int i=0;i<la;i++)
+	{
+		arr[i]=m%10;
+		m=m/10;
+	}
+	if(flag==1)
+	printf("-");
+	int point=0;
+	for(int i=0;i<la;i++)
+	{
+		if(point==0&&arr[i]==0)
+		continue;
+		point=1;
+		printf("%d",arr[i]);
+	}
+	return 0;
 }
