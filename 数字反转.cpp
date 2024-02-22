@@ -1,40 +1,112 @@
 #include<stdio.h>
+#include<string.h>
+char ar[10010]={0};
+
 int main()
 {
-	long long n;
-	scanf("%lld",&n);
-	int flag=0;
-	if(n<0)
+	int flag=1;
+	int bat=0;
+	scanf("%s",ar);
+	int la=strlen(ar);
+	for(int i=0;i<la;i++)
 	{
-		flag=1;
-		n*=-1;
-	}
-	long long m=n;
-	int la=1;
-	for(la=1;;la++)
-	{
-		if(m<10)
+		if(ar[i]=='.')
 		{
+			flag=2;
+			bat=i;
 			break;
 		}
-		m/=10;
+		else if(ar[i]=='/')
+		{
+			flag=3;
+			bat=i;
+			break;
+		}
+		else if(ar[i]=='%')
+		{
+			flag=4;
+			bat=i;
+			break;
+		}
 	}
-	m=n;
-	int arr[la]={0};
-	for(int i=0;i<la;i++)
-	{
-		arr[i]=m%10;
-		m=m/10;
-	}
+
+	int bunch=0;
 	if(flag==1)
-	printf("-");
-	int point=0;
-	for(int i=0;i<la;i++)
 	{
-		if(point==0&&arr[i]==0)
-		continue;
-		point=1;
-		printf("%d",arr[i]);
+		for(int i=la-1;i>=0;i--)
+		{
+			if(ar[i]!=48)
+			{
+				bunch=1;				
+			}
+			if(bunch==1)
+			printf("%d",ar[i]-48);
+		}
+	}
+	else if(flag==2)
+	{
+		for(int i=bat-1;i>=0;i--)
+		{
+			if(ar[i]!=48)
+			{
+				bunch=1;				
+			}
+			if(bunch==1)
+			printf("%d",ar[i]-48);
+		}
+		printf(".");
+		bunch=0;
+		for(int i=bat+1;i<la;i++)
+		{
+			if(ar[i]!=48)
+			bunch=i;
+		}
+		for(int i=la-1;i>=bunch-1;i--)
+		{
+//			if(ar[i]!=48)
+//			{
+//				bunch=1;				
+//			}
+			//if(bunch==1)
+			printf("%d",ar[i]-48);
+		}
+	}
+	else if(flag==3)
+	{
+		for(int i=bat-1;i>=0;i--)
+		{
+			if(ar[i]!=48)
+			{
+				bunch=1;				
+			}
+			if(bunch==1)
+			printf("%d",ar[i]-48);
+		}
+		printf("/");
+		bunch=0;
+		//int jet=0;
+		for(int i=la-1;i>=bunch+3;i--)
+		{
+			if(ar[i]!=48)
+			{
+				bunch=1;				
+			}
+			if(bunch==1)
+			printf("%d",ar[i]-48);
+		}
+	}
+	else if(flag==4)
+	{
+		for(int i=la-2;i>=0;i--)
+		{
+			if(ar[i]!=48)
+			{
+				bunch=1;				
+			}
+			if(bunch==1)
+			printf("%d",ar[i]-48);
+		}
+		printf("%");
 	}
 	return 0;
 }

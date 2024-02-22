@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+#define MAXN 15
+#define MAXM 15
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    while (T--) {
+        int n, m;
+        scanf("%d %d", &n, &m);
+
+        int a[MAXN];
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &a[i]);
+        }
+
+        int matches[MAXM][2];
+        for (int i = 0; i < m; i++) {
+            scanf("%d %d", &matches[i][0], &matches[i][1]);
+        }
+
+        int rank = 1;
+        for (int i = 0; i < n; i++) {
+            if (a[i] > a[0]) {
+                rank++;
+            }
+        }
+
+        for (int i = 0; i < m; i++) {
+            int u = matches[i][0] - 1;
+            int v = matches[i][1] - 1;
+            if (a[u] > a[v]) {
+                rank--;
+            } else if (a[u] < a[v]) {
+                rank++;
+            }
+        }
+
+        printf("%d\n", rank);
+    }
+
+    return 0;
+}
